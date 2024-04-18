@@ -1,6 +1,8 @@
 import express from "express";
+import colors from "colors";
 import dotenv from "dotenv";
 import { errorHandler } from "./middleware/errorMiddleware.js"
+import connectDB from "./config/db.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import classroomRoutes from "./routes/classroomRoutes.js";
 import teacherRoutes from "./routes/teacherRoutes.js";
@@ -11,6 +13,8 @@ import allocateClassroomRoutes from "./routes/allocateClassroomRoutes.js";
 dotenv.config();
 
 const port = process.env.PORT || 5000;
+
+connectDB();
 
 const app = express();
 

@@ -1,4 +1,4 @@
-import asyncHandler from '../middleware/errorMiddleware.js'
+import asyncHandler from "express-async-handler";
 
 // Add AllocateClassroom
 export const addAllocateClassroom = asyncHandler(async (req, res) => {
