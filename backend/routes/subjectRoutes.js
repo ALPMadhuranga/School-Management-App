@@ -1,29 +1,20 @@
 import express from "express";
 const router = express.Router();
+import { addSubject, getAllSubjects, getSingleSubject, updateSubject, deleteSubject } from "../controllers/subjectController.js";
 
 // Add Subject
-router.post("/", (req, res) => { 
-    res.status(200).json({ message: "Create Subject" });
-});
+router.post("/", addSubject);
 
 // Get All Subjects
-router.get("/", (req, res) => {
-  res.status(200).json({ message: "Get All Subjects" });
-});
+router.get("/", getAllSubjects);
 
 // Get Single Subject
-router.get("/:id", (req, res) => {
-  res.status(200).json({ message: `Get Single Subject ${req.params.id}` });
-});
+router.get("/:id", getSingleSubject);
 
 // Update Subject
-router.put("/:id", (req, res) => {
-    res.status(200).json({ message: `Update Subject ${req.params.id}` });
-});
+router.put("/:id", updateSubject);
 
 // Delete Subject
-router.delete("/:id", (req, res) => {
-    res.status(200).json({ message: `Delete Subject ${req.params.id}` });
-});
+router.delete("/:id", deleteSubject);
 
 export default router;

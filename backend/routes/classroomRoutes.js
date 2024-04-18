@@ -1,29 +1,20 @@
 import express from "express";
 const router = express.Router();
+import { addClassroom, getAllClassrooms, getSingleClassroom, updateClassroom, deleteClassroom } from "../controllers/classroomController.js";
 
 // Add Classroom
-router.post("/", (req, res) => { 
-    res.status(200).json({ message: "Create Classroom" });
-});
+router.post("/", addClassroom);
 
 // Get All Classrooms
-router.get("/", (req, res) => {
-  res.status(200).json({ message: "Get All Classrooms" });
-});
+router.get("/", getAllClassrooms);
 
 // Get Single Classroom
-router.get("/:id", (req, res) => {
-  res.status(200).json({ message: `Get Single Classroom ${req.params.id}` });
-});
+router.get("/:id", getSingleClassroom);
 
 // Update Classroom
-router.put("/:id", (req, res) => {
-    res.status(200).json({ message: `Update Classroom ${req.params.id}` });
-});
+router.put("/:id", updateClassroom);
 
 // Delete Classroom
-router.delete("/:id", (req, res) => {
-    res.status(200).json({ message: `Delete Classroom ${req.params.id}` });
-});
+router.delete("/:id", deleteClassroom);
 
 export default router;

@@ -1,29 +1,20 @@
 import express from "express";
 const router = express.Router();
+import { addTeacher, getAllTeachers, getSingleTeacher, updateTeacher, deleteTeacher } from "../controllers/teacherController.js";
 
 // Add Teacher
-router.post("/", (req, res) => { 
-    res.status(200).json({ message: "Create Teacher" });
-});
+router.post("/", addTeacher);
 
 // Get All Teachers
-router.get("/", (req, res) => {
-  res.status(200).json({ message: "Get All Teachers" });
-});
+router.get("/", getAllTeachers);
 
 // Get Single Teacher
-router.get("/:id", (req, res) => {
-  res.status(200).json({ message: `Get Single Teacher ${req.params.id}` });
-});
+router.get("/:id", getSingleTeacher);
 
 // Update Teacher
-router.put("/:id", (req, res) => {
-    res.status(200).json({ message: `Update Teacher ${req.params.id}` });
-});
+router.put("/:id", updateTeacher);
 
 // Delete Teacher
-router.delete("/:id", (req, res) => {
-    res.status(200).json({ message: `Delete Teacher ${req.params.id}` });
-});
+router.delete("/:id", deleteTeacher);
 
 export default router;

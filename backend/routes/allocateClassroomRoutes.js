@@ -1,19 +1,14 @@
 import express from "express";
 const router = express.Router();
+import { addAllocateClassroom, getAllocateClassrooms, deleteAllocateClassroom } from "../controllers/allocateClassroomController.js";
 
 // Add Allocate-Classroom
-router.post("/", (req, res) => { 
-    res.status(200).json({ message: "Create Allocate-Classroom" });
-});
+router.post("/", addAllocateClassroom);
 
 // Get All Allocate-Classrooms
-router.get("/", (req, res) => {
-  res.status(200).json({ message: "Get All Allocate-Classrooms" });
-});
+router.get("/", getAllocateClassrooms);
 
 // Delete Allocate-Classroom
-router.delete("/:id", (req, res) => {
-    res.status(200).json({ message: `Delete Allocate-Classroom ${req.params.id}` });
-});
+router.delete("/:id", deleteAllocateClassroom);
 
 export default router;
