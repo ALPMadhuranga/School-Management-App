@@ -16,7 +16,12 @@ const teacherSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, 'Please add an email address']
-    }
+    },
+    status: {
+        type: String,
+        required: true,
+        default: "100",
+    },
 }, {
     timestamps: true
 })
