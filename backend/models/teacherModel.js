@@ -20,7 +20,7 @@ const teacherSchema = new mongoose.Schema({
     status: {
         type: String,
         required: true,
-        default: "100",
+        default: "active",
     },
 }, {
     timestamps: true

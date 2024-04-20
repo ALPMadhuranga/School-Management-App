@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { addClassroom, getAllClassrooms, getSingleClassroom, updateClassroom, deleteClassroom } from "../controllers/classroomController.js";
+import { addClassroom, getAllClassrooms, getSingleClassroom, updateClassroom, deleteClassroom, disableClassroom, enableClassroom } from "../controllers/classroomController.js";
 
 // Add Classroom
 router.post("/", addClassroom);
@@ -16,5 +16,11 @@ router.put("/:id", updateClassroom);
 
 // Delete Classroom
 router.delete("/:id", deleteClassroom);
+
+// Disable Classroom
+router.put("/disable/:id", disableClassroom);
+
+// Enable Classroom
+router.put("/enable/:id", enableClassroom);
 
 export default router;

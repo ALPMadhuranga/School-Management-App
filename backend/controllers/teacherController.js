@@ -62,9 +62,14 @@ export const getSingleTeacher = asyncHandler(async (req, res) => {
   try {
     //get teacher id from url
     const { id } = req.params;
-    const teacher = await Teacher.findById(id);
+
+    // Subject Id (ObjectId) validate
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send({ message: "Invalid teacher ID" });
+    }
 
     //check teacher exist on database
+    const teacher = await Teacher.findById(id);
     if (!teacher) {
       return res.status(404).send({ message: "Teacher not found" });
     }
@@ -125,16 +130,20 @@ export const updateTeacher = asyncHandler(async (req, res) => {
 export const disableTeacher = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const teacher = await teacherModel.findById(id);
+
+    // Teacher Id (ObjectId) validate
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send({ message: "Invalid teacher ID" });
+    }
+
+    const teacher = await Teacher.findById(id);
 
     //check teacher available
     if (!teacher) {
       res.status(400).send({ message: "No data available" });
     }
-    await teacherModel.findByIdAndUpdate(id, { status: "101" }, { new: true });
-    res
-      .status(200)
-      .send({ message: `Teacher (${id}): record disabled successfully` });
+    await Teacher.findByIdAndUpdate(id, { status: "inactive" }, { new: true });
+    res.status(200).send({ message: `(${id}): record disabled successfully` });
   } catch (error) {
     console.log(error.message);
     res.status(500).send(error.message);
@@ -145,17 +154,20 @@ export const disableTeacher = asyncHandler(async (req, res) => {
 export const enableTeacher = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const teacher = await teacherModel.findById(id);
+
+    // Teacher Id (ObjectId) validate
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send({ message: "Invalid teacher ID" });
+    }
+
+    const teacher = await Teacher.findById(id);
 
     //check teacher available on database
     if (!teacher) {
-      res.status(400);
       res.status(400).send({ message: "No data available" });
     }
-    await teacherModel.findByIdAndUpdate(id, { status: "100" }, { new: true });
-    res
-      .status(200)
-      .send({ message: `Teacher (${id}): record enabled successfully` });
+    await Teacher.findByIdAndUpdate(id, { status: "active" }, { new: true });
+    res.status(200).send({ message: `(${id}): record enabled successfully` });
   } catch (error) {
     console.log(error.message);
     res.status(500).send(error.message);
@@ -166,9 +178,14 @@ export const enableTeacher = asyncHandler(async (req, res) => {
 export const deleteTeacher = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const teacher = await Teacher.findById(id);
+
+    // Teacher Id (ObjectId) validate
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).send({ message: "Invalid teacher ID" });
+    }
 
     // Check if teacher exists
+    const teacher = await Teacher.findById(id);
     if (!teacher) {
       res.status(400).send({ message: "No data available" });
     }

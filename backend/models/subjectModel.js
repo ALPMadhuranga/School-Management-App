@@ -5,6 +5,11 @@ const subjectSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please add subject name']
     },
+    status: {
+        type: String,
+        required: true,
+        default: "active",
+    },
 }, {
     timestamps: true
 })
