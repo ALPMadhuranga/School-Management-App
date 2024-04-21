@@ -1,6 +1,14 @@
 import express from "express";
 const router = express.Router();
-import { addStudent, getAllStudents, getSingleStudent, updateStudent, deleteStudent } from "../controllers/studentController.js";
+import {
+  addStudent,
+  getAllStudents,
+  getSingleStudent,
+  updateStudent,
+  deleteStudent,
+  disableStudent,
+  enableStudent,
+} from "../controllers/studentController.js";
 
 // Add Student
 router.post("/", addStudent);
@@ -16,5 +24,11 @@ router.put("/:id", updateStudent);
 
 // Delete Student
 router.delete("/:id", deleteStudent);
+
+// Disable Subject
+router.put("/disable/:id", disableStudent);
+
+// Enable Subject
+router.put("/enable/:id", enableStudent);
 
 export default router;
