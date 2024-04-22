@@ -102,6 +102,9 @@ export const getAllStudents = asyncHandler(async (req, res) => {
           "classroomDetails.className": 1, // Include only the className from classroomDetails
         },
       },
+      {
+        $sort: { _id: -1},
+      },
     ]);
 
     // If no students found
@@ -123,32 +126,85 @@ export const getSingleStudent = asyncHandler(async (req, res) => {
 
     const student = await Student.aggregate([
       {
-        $match: { _id: new mongoose.Types.ObjectId(_id) }, // Match the student by ID
+        $match: { _id: new mongoose.Types.ObjectId(_id) },
       },
       {
         $lookup: {
-          from: "classrooms", // The name of the collection to join
-          localField: "classroom", // The field from the students collection
-          foreignField: "_id", // The field from the classrooms collection
-          as: "classroomDetails", // The alias for the joined field
+          from: "classrooms",
+          localField: "classroom",
+          foreignField: "_id",
+          as: "classroomDetails",
+        },
+      },
+      {
+        $unwind: { path: "$classroomDetails", preserveNullAndEmptyArrays: true },
+      },
+      {
+        $lookup: {
+          from: "alocateClassrooms",
+          localField: "classroom",
+          foreignField: "classroom",
+          as: "allocatedClassrooms",
         },
       },
       {
         $unwind: {
-          path: "$classroomDetails",
+          path: "$allocatedClassrooms",
           preserveNullAndEmptyArrays: true,
-        }, // Unwind the classroomDetails array
+        },
+      },
+      {
+        $lookup: {
+          from: "teachers",
+          localField: "allocatedClassrooms.teacher",
+          foreignField: "_id",
+          as: "teacherDetails",
+        },
+      },
+      {
+        $unwind: { path: "$teacherDetails", preserveNullAndEmptyArrays: true },
+      },
+      {
+        $lookup: {
+          from: "alocateSubjects",
+          localField: "allocatedClassrooms.teacher",
+          foreignField: "teacher",
+          as: "allocatedSubjects",
+        },
+      },
+      {
+        $unwind: { path: "$allocatedSubjects", preserveNullAndEmptyArrays: true },
+      },
+      {
+        $lookup: {
+          from: "subjects",
+          localField: "allocatedSubjects.subject",
+          foreignField: "_id",
+          as: "subjectDetails",
+        },
+      },
+      {
+        $unwind: { path: "$subjectDetails", preserveNullAndEmptyArrays: true },
       },
       {
         $project: {
-          _id: 1,
           firstName: 1,
           lastName: 1,
           contactPerson: 1,
           contactNo: 1,
           email: 1,
-          birthDate: 1,
-          "classroomDetails.className": 1, // Include only the className from classroomDetails
+          birthDay: 1,
+          classroom: 1,
+          // Excluding arrays of teacher and subject records
+          allocatedClassroomID: "$classroomData._id",
+          allocatedClassroom: "$classroomDetails.classroomName",
+          teacher: {
+            teacherFirstName: "$teacherDetails.firstName",
+            teacherLastName: "$teacherDetails.lastName",
+          },
+          subject: {
+            subjectName: "$subjectDetails.subjectName",
+          },
         },
       },
     ]);

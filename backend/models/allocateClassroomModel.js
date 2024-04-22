@@ -6,10 +6,10 @@ const allocateClassroomSchema = new mongoose.Schema({
         ref: 'Teacher',
         required: [true, 'Please add a teacher']
     },
-    subject: {
+    classroom: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Subject',
-        required: [true, 'Please add a subject']
+        ref: 'Classroom',
+        required: [true, 'Please add a classroom']
     },
 }, {
     timestamps: true
