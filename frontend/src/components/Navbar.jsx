@@ -4,7 +4,7 @@ import logo from '../assets/logo.png'
 
 const Navbar = () => {
 
-  const linkClass = ({ isActive }) => isActive ? 'bg-black text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2' : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2';
+  const linkClass = ({ isActive }) => isActive ? 'bg-white text-black hover:bg-white hover:text-black rounded-md px-3 py-2' : 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2';
 
   return (
     <>
@@ -41,16 +41,16 @@ const Navbar = () => {
                     Student
                   </NavLink>
                   <NavLink
-                    to="/classroom"
-                    className={linkClass}
-                  >
-                    Class
-                  </NavLink>
-                  <NavLink
                     to="/teacher"
                     className={linkClass}
                   >
                     Teachers
+                  </NavLink>
+                  <NavLink
+                    to="/classroom"
+                    className={linkClass}
+                  >
+                    Class
                   </NavLink>
                   <NavLink
                     to="/subject"
