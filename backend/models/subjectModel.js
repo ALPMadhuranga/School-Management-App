@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const subjectSchema = new mongoose.Schema({
-    subName: {
+    subjectName: {
         type: String,
         required: [true, 'Please add subject name'],
         trim: true,

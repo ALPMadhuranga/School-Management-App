@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const classroomSchema = new mongoose.Schema({
-    className: {
+    classroomName: {
         type: String,
         required: [true, 'Please add classromm name'],
         trim: true,

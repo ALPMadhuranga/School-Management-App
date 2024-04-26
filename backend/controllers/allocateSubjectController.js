@@ -48,12 +48,12 @@ export const getAllocateSubjects = asyncHandler(async (req, res) => {
           from: "teachers",
           localField: "teacher",
           foreignField: "_id",
-          as: "teacherDetails",
+          as: "teacher",
         },
       },
       {
         $unwind: {
-          path: "$teacherDetails",
+          path: "$teacher",
           preserveNullAndEmptyArrays: true,
         },
       },
@@ -62,27 +62,23 @@ export const getAllocateSubjects = asyncHandler(async (req, res) => {
           from: "subjects",
           localField: "subject",
           foreignField: "_id",
-          as: "subjectDetails",
+          as: "subject",
         },
       },
       {
         $unwind: {
-          path: "$subjectDetails",
+          path: "$subject",
           preserveNullAndEmptyArrays: true,
         },
       },
       {
         $project: {
-          _id: 1,
           teacher: {
-            $concat: [
-              "$teacherDetails.firstName",
-              " ",
-              "$teacherDetails.lastName",
-            ],
+            firstName: 1,
+            lastName: 1,
           },
           subject: {
-            subjectName: "$subjectDetails.subName",
+            subjectName: 1,
           },
         },
       },
@@ -113,23 +109,24 @@ export const getAllocateSubject = asyncHandler(async (req, res) => {
     //Check if the allocate subject available in the database
     const allocateSubject = await AllocateSubject.findById(id)
       .populate({ path: "teacher", select: "firstName lastName" })
-      .populate({ path: "subject", select: "subName" });
+      .populate({ path: "subject", select: "subjectName" });
 
     if (!allocateSubject) {
-      return res.status(404).json({ message: "No data available" });
+       res.status(400).json({ message: "No data available" });
     }
 
-    // Extract only the required fields (teacher name and subject name)
-    const { _id, teacher, subject, createdAt, updatedAt } = allocateSubject;
-    const response = {
-      _id,
-      teacher: teacher.firstName + " " + teacher.lastName,
-      subject: subject.subName,
-      createdAt,
-      updatedAt,
-    };
+    // // Extract only the required fields (teacher name and subject name)
+    // const { _id, teacher, subject, createdAt, updatedAt } = allocateSubject;
+    // const response = {
+    //   _id,
+    //   teacher: teacher.firstName + " " + teacher.lastName,
+    //   subject: subject.subName,
+    //   createdAt,
+    //   updatedAt,
+    // };
 
-    res.json(response);
+    res.json(allocateSubject);
+
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error" });
   }
@@ -191,8 +188,7 @@ export const deleteAllocateSubject = asyncHandler(async (req, res) => {
     await AllocateSubject.findByIdAndDelete(id);
 
     res
-      .status(200)
-      .json({ message: `Allocate Subject deleted successfully: ${id}` });
+      .status(200).json({ message: `Allocate Subject deleted successfully: ${id}` });
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error" });
   }

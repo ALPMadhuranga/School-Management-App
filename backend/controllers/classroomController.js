@@ -5,22 +5,22 @@ import mongoose from "mongoose";
 // Add Classroom
 export const addClassroom = asyncHandler(async (req, res) => {
   try {
-    const { className } = req.body;
+    const { classroomName } = req.body;
 
-    // Check if className field is empty
-    if (!className) {
+    // Check if classroomName field is empty
+    if (!classroomName) {
       return res.status(400).send({ message: "Classroom name is required" });
     }
 
     // Check if classroom already exists in the database
-    const existingClassroom = await Classroom.findOne({ className });
+    const existingClassroom = await Classroom.findOne({ classroomName });
     if (existingClassroom) {
       return res.status(400).send({ message: "Classroom already exists" });
     }
 
     // Create a new classroom record
     const classroom = await Classroom.create({
-      className,
+      classroomName,
     });
 
     res.status(200).json(classroom);
@@ -81,10 +81,10 @@ export const getSingleClassroom = asyncHandler(async (req, res) => {
 export const updateClassroom = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const { className } = req.body;
+    const { classroomName } = req.body;
 
     // Check if all required fields are provided
-    if (!className) {
+    if (!classroomName) {
       return res.status(400).send({ message: "Classroom name is required" });
     }
 
@@ -97,7 +97,7 @@ export const updateClassroom = asyncHandler(async (req, res) => {
     const updatedClassroom = await Classroom.findByIdAndUpdate(
       id,
       {
-        className,
+        classroomName,
       },
       { new: true }
     );

@@ -1,6 +1,7 @@
 import { FaTrash, FaEdit } from "react-icons/fa";
+import PropTypes from "prop-types";
 
-const SubjectTable = () => {
+const SubjectTable = ({ subjectDetails, getOneSubject, deleteSubject }) => {
   return (
     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-5 max-w-6xl mx-auto mt-10">
       <h2 className="text-2xl font-bold mb-6 text-gray-600 border-b-2">Subject Details</h2>
@@ -12,21 +13,29 @@ const SubjectTable = () => {
           </tr>
         </thead>
         <tbody>
+          {subjectDetails.map((row) => 
           <tr className="bg-white border-b border-blue-500">
-            <td className="py-2 px-4">Mathematics</td>
-            <td className="py-2 px-4">
-              <button className="text-green-500 hover:text-green-700 text-lg py-2 px-4">
-                <FaEdit />
-              </button>
-              <button className="text-red-500 hover:text-red-700 text-lg py-2 px-4">
-                <FaTrash />
-              </button>
-            </td>
-          </tr>
+          <td className="py-2 px-4"> {row.subjectName} </td>
+          <td className="py-2 px-4">
+            <button onClick={() => getOneSubject(row._id)} className="text-green-500 hover:text-green-700 text-lg py-2 px-4">
+              <FaEdit />
+            </button>
+            <button onClick={() => deleteSubject(row._id)} className="text-red-500 hover:text-red-700 text-lg py-2 px-4">
+              <FaTrash />
+            </button>
+          </td>
+        </tr>
+        )}
         </tbody>
       </table>
     </div>
   );
+};
+
+SubjectTable.propTypes = {
+  subjectDetails: PropTypes.array.isRequired,
+  getOneSubject: PropTypes.func.isRequired,
+  deleteSubject: PropTypes.func.isRequired,
 };
 
 export default SubjectTable;

@@ -5,15 +5,15 @@ import mongoose from "mongoose";
 // Add Subject
 export const addSubject = asyncHandler(async (req, res) => {
   try {
-    const { subName } = req.body;
+    const { subjectName } = req.body;
 
     // check that fields are empty or not
-    if (!subName) {
+    if (!subjectName) {
       return res.status(400).send({ message: "All fields are required" });
     }
 
     // Check if the subject already exists in the database
-    const existingSubject = await Subject.findOne({ subName });
+    const existingSubject = await Subject.findOne({ subjectName });
 
     if (existingSubject) {
       return res.status(400).send({ message: "Subject already exists" });
@@ -21,7 +21,7 @@ export const addSubject = asyncHandler(async (req, res) => {
 
     //crate record
     const subject = await Subject.create({
-      subName,
+      subjectName,
     });
 
     res.status(200).json(subject);
@@ -85,10 +85,10 @@ export const updateSubject = asyncHandler(async (req, res) => {
       return res.status(400).send({ message: "Invalid subject ID" });
     }
 
-    const { subName } = req.body;
+    const { subjectName } = req.body;
 
     // Check if all required fields are provided
-    if (!subName) {
+    if (!subjectName) {
       return res.status(400).send({ message: "All fields are required" });
     }
 
@@ -96,7 +96,7 @@ export const updateSubject = asyncHandler(async (req, res) => {
     const updatedSubject = await Subject.findByIdAndUpdate(
       id,
       {
-        subName,
+        subjectName,
       },
       { new: true }
     );

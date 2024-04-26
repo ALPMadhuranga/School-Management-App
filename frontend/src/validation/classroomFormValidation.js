@@ -1,17 +1,17 @@
-export const validateClassroomForm = (className) => {
+export const validateClassroomForm = (classroomName) => {
   const errors = {};
 
-  if (!className.trim()) {
-    errors.className = "First name is required";
-  } else if (!isValidClassroom(className)) {
-    errors.className =
+  if (!classroomName.trim()) {
+    errors.classroomName = "First name is required";
+  } else if (!isValidClassroom(classroomName)) {
+    errors.classroomName =
       "Invalid format. The accepted format should be similar to 'Grade 1A'.";
   }
 
   return errors;
 };
 
-const isValidClassroom = (className) => {
+const isValidClassroom = (classroomName) => {
   const ClassroomRegex = /^(Grade\s\d+[A-Za-z])$/;
-  return ClassroomRegex.test(className);
+  return ClassroomRegex.test(classroomName);
 };
