@@ -2,8 +2,8 @@
   "name": "school-management-app",
   "version": "1.0.0",
   "description": "school management system",
-  "type": "module",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js"

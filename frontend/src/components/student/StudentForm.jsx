@@ -6,7 +6,7 @@ const StudentForm = () => {
     // const { firstName, lastName, contactPerson, contactNumber, email, birthDate, age, classroom} = formData;
 
   return (
-    <div className=" sm:mx-auto sm:w-full sm:max-w-md lg:max-w-6xl md:max-w-lg">
+    <div className=" sm:mx-auto sm:w-full sm:max-w-md lg:max-w-6xl md:max-w-lg mt-20">
     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
       <h2 className="text-left text-3xl font-bold mb-6 border-b-2 border-gray-300">
         Add Student
