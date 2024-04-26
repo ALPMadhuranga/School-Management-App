@@ -4,12 +4,14 @@ const allocateSubjectSchema = new mongoose.Schema({
     teacher: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Teacher',
-        required: [true, 'Please add a teacher']
+        required: [true, 'Please add a teacher'],
+        trim: true,
     },
     subject: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Subject',
-        required: [true, 'Please add a subject']
+        required: [true, 'Please add a subject'],
+        trim: true,
     },
 }, {
     timestamps: true
