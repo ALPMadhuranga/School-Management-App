@@ -1,9 +1,9 @@
-import React from "react";
+import PropTypes from "prop-types";
 import ClassroomDropdown from "../dropdowns/ClassroomDropdown";
 import TeacherDropdown from "../dropdowns/TeacherDropdown";
 
-const AllocateClassroomForm = () => {
-  // const { teacher, classroom } = formData;
+const AllocateClassroomForm = ({ onSubmit, onChange, formData, formErrors }) => {
+  const { teacher, classroom } = formData;
 
   return (
     <div className=" sm:mx-auto sm:w-full sm:max-w-md lg:max-w-6xl md:max-w-lg mt-20">
@@ -11,14 +11,22 @@ const AllocateClassroomForm = () => {
         <h2 className="text-left text-3xl font-bold mb-6 border-b-2 border-gray-300">
           Allocate Classroom
         </h2>
-        <form className="space-y-6">
+        <form onSubmit={onSubmit} className="space-y-6">
           <div className="sm:grid sm:grid-cols-2 sm:gap-x-6">
             <div className="mb-3">
-              <TeacherDropdown />
+              <TeacherDropdown 
+                value={teacher}
+                onChange={onChange}
+                formErrors={formErrors}
+              />
             </div>
 
             <div className="mb-3">
-              <ClassroomDropdown />
+              <ClassroomDropdown 
+                value={classroom}
+                onChange={onChange}
+                formErrors={formErrors}
+              />
             </div>
           </div>
 
@@ -29,12 +37,18 @@ const AllocateClassroomForm = () => {
             >
               Save
             </button>
-            {/* <button className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 mt-2' >Cancel</button> */}
           </div>
         </form>
       </div>
     </div>
   );
+};
+
+AllocateClassroomForm.propTypes = {
+  formData: PropTypes.object.isRequired,
+  formErrors: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default AllocateClassroomForm;

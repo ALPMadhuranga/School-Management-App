@@ -52,12 +52,12 @@ export const getAllocateClassrooms = asyncHandler(async (req, res) => {
           from: "teachers",
           localField: "teacher",
           foreignField: "_id",
-          as: "teacherDetails",
+          as: "teacher",
         },
       },
       {
         $unwind: {
-          path: "$teacherDetails",
+          path: "$teacher",
           preserveNullAndEmptyArrays: true,
         },
       },
@@ -66,27 +66,23 @@ export const getAllocateClassrooms = asyncHandler(async (req, res) => {
           from: "classrooms",
           localField: "classroom",
           foreignField: "_id",
-          as: "classroomDetails",
+          as: "classroom",
         },
       },
       {
         $unwind: {
-          path: "$classroomDetails",
+          path: "$classroom",
           preserveNullAndEmptyArrays: true,
         },
       },
       {
         $project: {
-          _id: 1,
           teacher: {
-            $concat: [
-              "$teacherDetails.firstName",
-              " ",
-              "$teacherDetails.lastName",
-            ],
+            firstName: 1,
+            lastName: 1,
           },
           classroom: {
-            className: "$classroomDetails.className",
+            classroomName: 1,
           },
         },
       },
@@ -127,9 +123,8 @@ export const deleteAllocateClassroom = asyncHandler(async (req, res) => {
 
     // Delete record
     await AllocateClassroom.findByIdAndDelete(id);
-    res
-      .status(200)
-      .json({ message: `Allocate Classroom deleted successfully: ${id}` });
+
+    res.status(200).json({ message: `Allocate Classroom deleted successfully: ${id}` });
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error" });
   }

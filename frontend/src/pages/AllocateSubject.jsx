@@ -63,7 +63,7 @@ const AllocateSubject = () => {
               .delete(`/api/allocate-subjects/${id}`)
               .then((res) => {
                 if (res.status === 200) {
-                  toast.success("Record deleted successfully");
+                  toast.success("Record deactivated successfully");
                   getAllAllocateSubjects();
                 }
               })
