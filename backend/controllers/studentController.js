@@ -141,7 +141,7 @@ export const getSingleStudent = asyncHandler(async (req, res) => {
       },
       {
         $lookup: {
-          from: "alocateClassrooms",
+          from: "allocateclassrooms",
           localField: "classroom",
           foreignField: "classroom",
           as: "allocatedClassrooms",
@@ -166,7 +166,7 @@ export const getSingleStudent = asyncHandler(async (req, res) => {
       },
       {
         $lookup: {
-          from: "alocateSubjects",
+          from: "allocatesubjects",
           localField: "allocatedClassrooms.teacher",
           foreignField: "teacher",
           as: "allocatedSubjects",
@@ -194,10 +194,10 @@ export const getSingleStudent = asyncHandler(async (req, res) => {
           contactNo: 1,
           email: 1,
           birthDate: 1,
-          classroom: 1,
           // Excluding arrays of teacher and subject records
           allocatedClassroomID: "$classroomDetails._id",
           allocatedClassroom: "$classroomDetails.classroomName",
+          
           teacher: {
             teacherFirstName: "$teacherDetails.firstName",
             teacherLastName: "$teacherDetails.lastName",

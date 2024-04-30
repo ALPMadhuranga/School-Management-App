@@ -1,6 +1,6 @@
-import { FaTrash, FaEdit } from "react-icons/fa";
+import PropTypes from "prop-types";
 
-const StudentRecordTable = () => {
+const StudentRecordTable = ({ teacherAndSubjectDetails }) => {
   return (
     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-5 max-w-6xl mx-auto mt-10">
       <h2 className="text-2xl font-bold mb-6 text-gray-600 border-b-2">Teacher & Subject Details</h2>
@@ -12,14 +12,36 @@ const StudentRecordTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b border-blue-500">
-            <td className="py-2 px-4">John Doe</td>
-            <td className="py-2 px-4">Fernando</td>
-          </tr>
+          {teacherAndSubjectDetails.length > 0 ? (
+            teacherAndSubjectDetails.map((details, index) => (
+            <tr key={index} className="bg-white border-b border-blue-500">
+              <td className="py-2 px-4"> {details.subject && details.subject.subjectName ? (
+                `${details.subject.subjectName}`
+              ) : (
+                <span className="text-red-500">No data available</span>
+              )} 
+              </td>
+              <td className="py-2 px-4">
+                {details.teacher && details.teacher.firstName && details.teacher.lastName ? (
+                  `${details.teacher.firstName} ${details.teacher.lastName}` ) : (
+                    <span className="text-red-500">No data available</span>
+                )}
+              </td>
+            </tr>
+            ))
+          ): (
+            <tr>
+              <td>No data available</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
   );
+};
+
+StudentRecordTable.propTypes = {
+  teacherAndSubjectDetails: PropTypes.array.isRequired,
 };
 
 export default StudentRecordTable;
