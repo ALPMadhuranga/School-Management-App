@@ -24,7 +24,7 @@ const AllocateClassroom = () => {
       .then((res) => {
         if (res.status === 200) {
           setAllocateClassroom(res.data);
-          // console.log(allocateClassroom);
+          console.log(allocateClassroom);
         }
       })
       .catch((error) => {

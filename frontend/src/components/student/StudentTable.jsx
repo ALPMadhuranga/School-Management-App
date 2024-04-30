@@ -1,6 +1,8 @@
 import { FaTrash, FaEdit } from "react-icons/fa";
+import PropTypes from "prop-types";
+import { format } from "date-fns";
 
-const StudentTable = () => {
+const StudentTable = ({ studentDetails, getOneStudent, deleteStudent }) => {
   return (
     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-5 max-w-6xl mx-auto mt-10">
       <h2 className="text-2xl font-bold mb-6 text-gray-600 border-b-2">Student List</h2>
@@ -18,27 +20,39 @@ const StudentTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white border-b border-blue-500">
-            <td className="py-2 px-4">John Doe</td>
-            <td className="py-2 px-4">Fernando</td>
-            <td className="py-2 px-4">0705695321</td>
-            <td className="py-2 px-4">john@testmail.com</td>
-            <td className="py-2 px-4">25/04/1996</td>
-            <td className="py-2 px-4">27</td>
-            <td className="py-2 px-4">Grade 01</td>
+          {studentDetails.map((row) => (
+            <tr key={row._id} className="bg-white border-b border-blue-500">
+            <td className="py-2 px-4">{row.firstName + ' ' + row.lastName}</td>
+            <td className="py-2 px-4">{row.contactPerson}</td>
+            <td className="py-2 px-4">{row.contactNo}</td>
+            <td className="py-2 px-4">{row.email}</td>
+            <td className="py-2 px-4">{format(new Date(row.birthDate), "dd/MM/yyyy")}</td>
+            <td className="py-2 px-4">{row.age}</td>
+            <td className="py-2 px-4"> {row.classroomDetails ? ( 
+              row.classroomDetails.classroomName
+             ) : (
+              <span className="text-red-500">Please add this record again!</span>
+             ) } </td>
             <td className="py-2 px-4">
-              <button className="text-green-500 hover:text-green-700 text-lg py-2 px-4">
+              <button onClick={() => getOneStudent(row._id)} className="text-green-500 hover:text-green-700 text-lg py-2 px-4">
                 <FaEdit />
               </button>
-              <button className="text-red-500 hover:text-red-700 text-lg py-2 px-4">
+              <button onClick={() => deleteStudent(row._id)} className="text-red-500 hover:text-red-700 text-lg py-2 px-4">
                 <FaTrash />
               </button>
             </td>
           </tr>
+          ))}
         </tbody>
       </table>
     </div>
   );
 };
+
+StudentTable.propTypes = {
+  studentDetails: PropTypes.array.isRequired,
+  getOneStudent: PropTypes.func.isRequired,
+  deleteStudent: PropTypes.func.isRequired,
+}
 
 export default StudentTable;

@@ -31,8 +31,8 @@ export const validateStudentForm = (formData) => {
     errors.email = "Invalid email format";
   }
 
-  if (!formData.birthDay.trim()) {
-    errors.birthDay = "Date of Birth is required";
+  if (!formData.birthDate.trim()) {
+    errors.birthDate = "Date of Birth is required";
   }
 
   if (!formData.age.trim()) {

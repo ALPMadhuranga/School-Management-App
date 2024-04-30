@@ -99,7 +99,7 @@ export const getAllStudents = asyncHandler(async (req, res) => {
           contactNo: 1,
           email: 1,
           birthDate: 1,
-          "classroomDetails.className": 1, // Include only the className from classroomDetails
+          "classroomDetails.classroomName": 1, // Include only the className from classroomDetails
         },
       },
       {
@@ -193,10 +193,10 @@ export const getSingleStudent = asyncHandler(async (req, res) => {
           contactPerson: 1,
           contactNo: 1,
           email: 1,
-          birthDay: 1,
+          birthDate: 1,
           classroom: 1,
           // Excluding arrays of teacher and subject records
-          allocatedClassroomID: "$classroomData._id",
+          allocatedClassroomID: "$classroomDetails._id",
           allocatedClassroom: "$classroomDetails.classroomName",
           teacher: {
             teacherFirstName: "$teacherDetails.firstName",

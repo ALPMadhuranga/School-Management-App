@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import { AllocateSubject } from "../models/allocateSubjectModel.js";
 import { Subject } from "../models/subjectModel.js";
 import { Teacher } from "../models/teacherModel.js";
+import mongoose from "mongoose";
 
 // Add AllocateSubject
 export const addAllocateSubject = asyncHandler(async (req, res) => {
