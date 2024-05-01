@@ -7,31 +7,31 @@ const StudentRecordTable = ({ teacherAndSubjectDetails }) => {
       <table className="w-full border-collapse border border-blue-500 mx-auto">
         <thead>
           <tr className="bg-blue-500 text-white">
-            <th className="py-2 px-4 text-left">Subject</th>
-            <th className="py-2 px-4 text-left">Teacher</th>
+            <th className="py-2 px-4 text-center">Subject</th>
+            <th className="py-2 px-4 text-center">Teacher</th>
           </tr>
         </thead>
         <tbody>
           {teacherAndSubjectDetails.length > 0 ? (
             teacherAndSubjectDetails.map((details, index) => (
             <tr key={index} className="bg-white border-b border-blue-500">
-              <td className="py-2 px-4"> {details.subject && details.subject.subjectName ? (
+              <td className="py-2 px-4 text-center"> {details.subject && details.subject.subjectName ? (
                 `${details.subject.subjectName}`
               ) : (
-                <span className="text-red-500">No data available!</span>
+                <span colspancolSpan={2} className="text-center py-4 text-red-400">No data available!</span>
               )} 
               </td>
-              <td className="py-2 px-4">
+              <td className="py-2 px-4 text-center">
                 {details.teacher && details.teacher.firstName && details.teacher.lastName ? (
                   `${details.teacher.firstName} ${details.teacher.lastName}` ) : (
-                    <span className="text-red-500">No data available</span>
+                    <span colspancolSpan={2} className="text-center py-4 text-red-400">No data available</span>
                 )}
               </td>
             </tr>
             ))
           ): (
             <tr>
-              <td>No data available</td>
+              <td colSpan={8} className="text-center py-4 text-red-400">No Data Available!</td>
             </tr>
           )}
         </tbody>
