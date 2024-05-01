@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import colors from "colors";
 import dotenv from "dotenv";
@@ -12,9 +13,11 @@ import allocateClassroomRoutes from "./routes/allocateClassroomRoutes.js";
 
 dotenv.config();
 
+connectDB();
+
 const port = process.env.PORT || 5000;
 
-connectDB();
+const _dirname = path.resolve();
 
 const app = express();
 
@@ -28,6 +31,8 @@ app.use('/api/teachers', teacherRoutes);
 app.use('/api/subjects', subjectRoutes);
 app.use('/api/allocate-subjects', allocateSubjectRoutes);
 app.use('/api/allocate-classrooms', allocateClassroomRoutes);
+
+app.use(express.static(path.join(_dirname, "/frontend/build")));
 
 app.use(errorHandler);
 
