@@ -13,7 +13,12 @@ const SubjectTable = ({ subjectDetails, getOneSubject, deleteSubject }) => {
           </tr>
         </thead>
         <tbody>
-          {subjectDetails.map((row) => 
+        {subjectDetails.length === 0 ? (
+            <tr>
+              <td colSpan={2} className="text-center py-4 text-red-400">No Data Available!</td>
+            </tr> 
+          ) : (
+          subjectDetails.map((row) => 
           <tr className="bg-white border-b border-blue-500">
           <td className="py-2 px-4"> {row.subjectName} </td>
           <td className="py-2 px-4">
@@ -25,7 +30,7 @@ const SubjectTable = ({ subjectDetails, getOneSubject, deleteSubject }) => {
             </button>
           </td>
         </tr>
-        )}
+        ))}
         </tbody>
       </table>
     </div>

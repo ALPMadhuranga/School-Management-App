@@ -16,7 +16,12 @@ const AllocateClassroomTable = ({
           </tr>
         </thead>
         <tbody>
-          {allocateClassroom.map((row)=> (
+        {allocateClassroom.length === 0 ? (
+            <tr>
+              <td colSpan={3} className="text-center py-4 text-red-400">No Data Available!</td>
+            </tr> 
+          ) : (
+          allocateClassroom.map((row)=> (
           <tr key={row._id} className="bg-white border-b border-blue-500">
             <td className="py-2 px-4"> {row.teacher ? (
               `${row.teacher.firstName} ${row.teacher.lastName}`
@@ -35,7 +40,7 @@ const AllocateClassroomTable = ({
               </button>
             </td>
           </tr>
-          ))}
+          )))}
         </tbody>
       </table>
     </div>

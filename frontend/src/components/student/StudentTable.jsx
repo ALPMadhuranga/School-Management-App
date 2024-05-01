@@ -20,7 +20,12 @@ const StudentTable = ({ studentDetails, getOneStudent, deleteStudent }) => {
           </tr>
         </thead>
         <tbody>
-          {studentDetails.map((row) => (
+          {studentDetails.length === 0 ? (
+            <tr>
+              <td colSpan={8} className="text-center py-4 text-red-400">No Data Available!</td>
+            </tr> 
+          ) : (
+          studentDetails.map((row) => (
             <tr key={row._id} className="bg-white border-b border-blue-500">
             <td className="py-2 px-4">{row.firstName + ' ' + row.lastName}</td>
             <td className="py-2 px-4">{row.contactPerson}</td>
@@ -42,7 +47,7 @@ const StudentTable = ({ studentDetails, getOneStudent, deleteStudent }) => {
               </button>
             </td>
           </tr>
-          ))}
+          )))}
         </tbody>
       </table>
     </div>

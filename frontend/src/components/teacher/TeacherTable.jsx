@@ -15,7 +15,12 @@ const TeacherTable = ({ teacherDetails, getSingleTeacher, deleteTeacher }) => {
           </tr>
         </thead>
         <tbody>
-          {teacherDetails.map((row) => (
+        {teacherDetails.length === 0 ? (
+            <tr>
+              <td colSpan={4} className="text-center py-4 text-red-400">No Data Available!</td>
+            </tr> 
+          ) : (
+          teacherDetails.map((row) => (
           <tr key={row._id} className="bg-white border-b border-blue-500">
             <td className="py-2 px-4">{row.firstName + ' ' + row.lastName}</td>
             <td className="py-2 px-4">{row.contactNo}</td>
@@ -29,7 +34,7 @@ const TeacherTable = ({ teacherDetails, getSingleTeacher, deleteTeacher }) => {
               </button>
             </td>
           </tr>
-          ))}
+          )))}
         </tbody>
       </table>
     </div>

@@ -18,7 +18,7 @@ const StudentRecordTable = ({ teacherAndSubjectDetails }) => {
               <td className="py-2 px-4"> {details.subject && details.subject.subjectName ? (
                 `${details.subject.subjectName}`
               ) : (
-                <span className="text-red-500">No data available</span>
+                <span className="text-red-500">No data available!</span>
               )} 
               </td>
               <td className="py-2 px-4">

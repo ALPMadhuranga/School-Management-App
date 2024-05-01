@@ -17,7 +17,12 @@ const ClassroomTable = ({
           </tr>
         </thead>
         <tbody>
-          {classroomDetails.map((row) => (
+        {classroomDetails.length === 0 ? (
+            <tr>
+              <td colSpan={2} className="text-center py-4 text-red-400">No Data Available!</td>
+            </tr> 
+          ) : (
+          classroomDetails.map((row) => (
             <tr className="bg-white border-b border-blue-500">
             <td className="py-2 px-4">{row.classroomName}</td>
             <td className="py-2 px-4">
@@ -29,7 +34,7 @@ const ClassroomTable = ({
               </button>
             </td>
           </tr>
-          ))}
+          )))}
         </tbody>
       </table>
     </div>
