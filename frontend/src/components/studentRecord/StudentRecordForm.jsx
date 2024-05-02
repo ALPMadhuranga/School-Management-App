@@ -9,6 +9,7 @@ const StudentRecordForm = ({
 }) => {
   const { studentName, classroom, contactPerson, email, contactNo, birthDate } =
     formData;
+    
   return (
     <div className=" sm:mx-auto sm:w-full sm:max-w-md lg:max-w-6xl md:max-w-lg mt-20">
       <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">

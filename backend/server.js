@@ -1,4 +1,3 @@
-import path from "path";
 import cors from "cors";
 import express from "express";
 import colors from "colors";
@@ -18,14 +17,17 @@ connectDB();
 
 const port = process.env.PORT || 5000;
 
-const _dirname = path.resolve();
-
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+// Middleware for handling CORS POLICY
+const corsOptions = {
+    origin: "https://school-management-system-frontend-eosin.vercel.app/",
+    credentials: true,
+  };
+  app.use(cors(corsOptions));
 
 // EndPoints
 app.use('/api/students', studentRoutes);
@@ -34,8 +36,6 @@ app.use('/api/teachers', teacherRoutes);
 app.use('/api/subjects', subjectRoutes);
 app.use('/api/allocate-subjects', allocateSubjectRoutes);
 app.use('/api/allocate-classrooms', allocateClassroomRoutes);
-
-app.use(express.static(path.join(_dirname, "/frontend/build")));
 
 app.use(errorHandler);
 
