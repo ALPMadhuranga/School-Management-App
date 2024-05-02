@@ -122,11 +122,11 @@ export const getAllStudents = asyncHandler(async (req, res) => {
 // Get Single Student
 export const getSingleStudent = asyncHandler(async (req, res) => {
   try {
-    const _id = req.params.id; // Extract the student ID from the request parameters
+    const {id} = req.params; // Extract the student ID from the request parameters
 
     const student = await Student.aggregate([
       {
-        $match: { _id: new mongoose.Types.ObjectId(_id) },
+        $match: { _id: new mongoose.Types.ObjectId(id) },
       },
       {
         $lookup: {
@@ -214,7 +214,7 @@ export const getSingleStudent = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: "Student not found" });
     }
 
-    res.status(200).json(student[0]); // Send the first element of the result (since it's an array with one element)
+    res.status(200).json(student); // Send the first element of the result (since it's an array with one element)
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

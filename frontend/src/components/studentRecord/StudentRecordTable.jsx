@@ -22,8 +22,8 @@ const StudentRecordTable = ({ teacherAndSubjectDetails }) => {
               )} 
               </td>
               <td className="py-2 px-4 text-center">
-                {details.teacher && details.teacher.firstName && details.teacher.lastName ? (
-                  `${details.teacher.firstName} ${details.teacher.lastName}` ) : (
+                {details.teacher && details.teacher.teacherFirstName && details.teacher.teacherLastName ? (
+                  `${details.teacher.teacherFirstName} ${details.teacher.teacherLastName}` ) : (
                     <span colspancolSpan={2} className="text-center py-4 text-red-400">No data available</span>
                 )}
               </td>

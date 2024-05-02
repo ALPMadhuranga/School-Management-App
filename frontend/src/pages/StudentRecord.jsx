@@ -47,12 +47,12 @@ const StudentRecord = () => {
     try {
       const response = await axios.get(`/api/students/${selectedStudentId}`);
       if (response.status === 200) {
-        const studentData = response.data;
-        // console.log(studentData);
+        const studentData = response.data[0]; 
+        console.log(studentData);
         const classroomDetails = studentData.allocatedClassroom
           ? studentData.allocatedClassroom
           : "";
-        // console.log(classroomDetails)
+        console.log(classroomDetails)
   
         setFormData({
           classroom: classroomDetails,
@@ -63,21 +63,12 @@ const StudentRecord = () => {
         });
         
         // Set teacherAndSubjectDetails only if allocatedClassroom is available
-        if (studentData.allocatedClassroom) {
-          setTeacherAndSubjectDetails([
-            {
-              teacher: {
-                firstName: studentData.teacher?.teacherFirstName || "",
-                lastName: studentData.teacher?.teacherLastName || "",
-              },
-              subject: {
-                subjectName: studentData.subject?.subjectName || "",
-              },
-            },
-          ]);
-        } else {
-          setTeacherAndSubjectDetails([]);
-        }
+        // if (studentData.allocatedClassroom) {
+          setTeacherAndSubjectDetails(response.data);
+          // console.log(teacherAndSubjectDetails)
+        // } else {
+        //   setTeacherAndSubjectDetails([]);
+        // }
       }
     } catch (error) {
       console.error("Error fetching student data:", error);
