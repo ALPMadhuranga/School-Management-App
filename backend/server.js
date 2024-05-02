@@ -10,8 +10,11 @@ import teacherRoutes from "./routes/teacherRoutes.js";
 import subjectRoutes from "./routes/subjectRoutes.js";
 import allocateSubjectRoutes from "./routes/allocateSubjectRoutes.js";
 import allocateClassroomRoutes from "./routes/allocateClassroomRoutes.js";
+import path from "path";
 
 dotenv.config();
+
+const _dirname = path.resolve();
 
 connectDB();
 
@@ -21,12 +24,13 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cors());
 
-app.get('/', (request, response) => {
-  console.log(request);
-  return response.status(234).send('Welcome To MERN Stack School management system');
+// Serve frontend
+app.use(express.static(path.join(_dirname, "/frontend/build")));
+
+app.get("*", (req, res) => {
+  res.send(path.join(_dirname, "frontend", "build", "index.html"));
 });
 
 // EndPoints
