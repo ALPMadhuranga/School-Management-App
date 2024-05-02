@@ -24,10 +24,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // Middleware for handling CORS POLICY
 const corsOptions = {
-    origin: "https://school-management-system-frontend-eosin.vercel.app/",
+    origin: "https://",
     credentials: true,
   };
   app.use(cors(corsOptions));
+
+  app.get('/', (request, response) => {
+    console.log(request);
+    return response.status(234).send('Welcome To MERN Stack School management system');
+  });
 
 // EndPoints
 app.use('/api/students', studentRoutes);
