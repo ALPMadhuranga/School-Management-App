@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Middleware for handling CORS POLICY
 const corsOptions = {
-    origin: "https://",
+    origin: "https://school-management-system-rouge.vercel.app/",
     credentials: true,
   };
   app.use(cors(corsOptions));
