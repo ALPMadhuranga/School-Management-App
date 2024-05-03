@@ -28,14 +28,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// Serve static files from the frontend build directory
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "/frontend/build")));
-
-// Serve frontend index.html for any route not handled by API
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
-});
 
 // API Routes
 app.use('/api/students', studentRoutes);
@@ -45,10 +37,20 @@ app.use('/api/subjects', subjectRoutes);
 app.use('/api/allocate-subjects', allocateSubjectRoutes);
 app.use('/api/allocate-classrooms', allocateClassroomRoutes);
 
+
+// Serve static files from the frontend build directory
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+// Serve frontend index.html for any route not handled by API
+app.get("*", (req, res) => {
+  res.send(path.join(__dirname, "frontend", "dist", "index.html"));
+});
+
 // Error handling middleware
 app.use(errorHandler);
 
 // Start server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
-})
+});
