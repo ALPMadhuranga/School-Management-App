@@ -43,3 +43,4 @@ This is a School Management application with CRUD functionalities with relationa
 - Access the application in your browser: http://localhost:3000
 
 ## Demo
+https://school-management-app-q9e9.onrender.com/
