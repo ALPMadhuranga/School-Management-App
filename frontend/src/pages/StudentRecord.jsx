@@ -48,11 +48,9 @@ const StudentRecord = () => {
       const response = await axios.get(`/api/students/${selectedStudentId}`);
       if (response.status === 200) {
         const studentData = response.data[0]; 
-        console.log(studentData);
         const classroomDetails = studentData.allocatedClassroom
           ? studentData.allocatedClassroom
           : "";
-        console.log(classroomDetails)
   
         setFormData({
           classroom: classroomDetails,

@@ -2,8 +2,8 @@ import express from "express";
 const router = express.Router();
 import { addTeacher, getAllTeachers, getSingleTeacher, updateTeacher, deleteTeacher, disableTeacher, enableTeacher } from "../controllers/teacherController.js";
 
-// Add Teacher
-router.post("/", addTeacher);
+// Add Teacher and protect route
+router.post("/",  addTeacher);
 
 // Get All Teachers
 router.get("/", getAllTeachers);

@@ -13,10 +13,15 @@ import Subject from "./pages/Subject";
 import AllocateClassroom from "./pages/AllocateClassroom";
 import AllocateSubject from "./pages/AllocateSubject";
 import MainLayout from "./layouts/MainLayout";
+import Login from "./pages/Login";
+import PrivateRoutes from "./components/PrivateRoutes";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
+      <>
+      <Route path='' element={<PrivateRoutes />}>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<StudentRecord />} />
         <Route path="/student" element={<Student />} />
@@ -27,10 +32,19 @@ function App() {
         <Route path="/allocate-classroom" element={<AllocateClassroom />}/>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
+      </Route>
+      <Route path="/login" element={<Login />} />
+      </>
     )
   );
 
-  return <RouterProvider router={router} />;
+  return (
+  <>
+  <RouterProvider router={router} />
+  <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} />
+  </>
+
+)
 }
 
 export default App;
